@@ -1,5 +1,4 @@
-using UnityEngine;
-using System.Collections;
+using System;
 
 public class CharacterState : ICharacterState
 {
@@ -24,10 +23,10 @@ public class CharacterState : ICharacterState
 	#region Update Method
 	
 	// Update is called once per frame
-	public void Update () 
+	public void Update (float deltaTime) 
 	{
 		/* Get current state. */
-		string movementState = _movementState.State().ToString();
+		string movementState = _movementState.State();
 		
 		/* If Sprinting, decrease energy. */
 		if(movementState == "StandingSprinting")
@@ -38,7 +37,7 @@ public class CharacterState : ICharacterState
 				_attributes.currentSpeed = _attributes.sprintingSpeed;
 			}
 			
-			_attributes.currentEnergy -= Time.deltaTime * _attributes.sprintCost;
+			_attributes.currentEnergy -= deltaTime * _attributes.sprintCost;
 			
 			/* If out of energy, stop sprinting. */
 			if(_attributes.currentEnergy <= 0)
@@ -53,7 +52,7 @@ public class CharacterState : ICharacterState
 			/* If not at max energy, regenerate energy. */
 			if(_attributes.currentEnergy < _attributes.maxEnergy)
 			{
-				_attributes.currentEnergy += Time.deltaTime * _attributes.energyRegenRate;
+				_attributes.currentEnergy += deltaTime * _attributes.energyRegenRate;
 			}
 		}
 		/* If moving, but not sprinting. */
@@ -72,7 +71,7 @@ public class CharacterState : ICharacterState
 			/* If not at max energy, regenerate 0.75 of energy regen rate because still moving. */
 			if(_attributes.currentEnergy < _attributes.maxEnergy)
 			{
-				_attributes.currentEnergy += Time.deltaTime * (_attributes.energyRegenRate * 0.75f);
+				_attributes.currentEnergy += deltaTime * (_attributes.energyRegenRate * 0.75f);
 			}
 		}
 		/* If jumping. */

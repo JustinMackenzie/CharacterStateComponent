@@ -9,6 +9,6 @@ public interface ICharacterState
 	void Sprint();
 	void StopSprint();
 	void DoneJump();
-	void Update();
+	void Update(float deltaTime);
 }
 
