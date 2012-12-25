@@ -50,7 +50,7 @@ public class CrouchingMoving : MovementState
 		return;	
 	}
 	
-	/* Returns the currect state. */
+	/* Returns the current state. */
 	public string State()
 	{
 		return GetType().ToString();

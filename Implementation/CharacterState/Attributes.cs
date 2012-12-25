@@ -15,7 +15,9 @@ public class Attributes
 	/* Energy cost of sprinting for 1 second. */
 	public float sprintCost = 20.0f;
 	/* Energy to be regenerated after 1 second of idle time. */
-	public float energyRegenRate = 20.0f;
+	public float idleEnergyRegenRate = 20.0f;
+	/* Energy to be regenerated after 1 second of moving time. */
+	public float movingEnergyRegenRate = 15.0f;
 	/* The current amount of energy. */
 	public float currentEnergy;
 	/* The point at which entity is no longer fatigued. */

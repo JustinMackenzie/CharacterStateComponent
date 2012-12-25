@@ -11,4 +11,3 @@ public interface ICharacterState
 	void DoneJump();
 	void Update(float deltaTime);
 }
-

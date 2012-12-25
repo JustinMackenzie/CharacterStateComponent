@@ -37,6 +37,7 @@ public class CharacterState : ICharacterState
 				_attributes.currentSpeed = _attributes.sprintingSpeed;
 			}
 			
+			/* Decrease energy by proper amount. */
 			_attributes.currentEnergy -= deltaTime * _attributes.sprintCost;
 			
 			/* If out of energy, stop sprinting. */
@@ -52,7 +53,7 @@ public class CharacterState : ICharacterState
 			/* If not at max energy, regenerate energy. */
 			if(_attributes.currentEnergy < _attributes.maxEnergy)
 			{
-				_attributes.currentEnergy += deltaTime * _attributes.energyRegenRate;
+				_attributes.currentEnergy += deltaTime * _attributes.idleEnergyRegenRate;
 			}
 		}
 		/* If moving, but not sprinting. */
@@ -71,7 +72,7 @@ public class CharacterState : ICharacterState
 			/* If not at max energy, regenerate 0.75 of energy regen rate because still moving. */
 			if(_attributes.currentEnergy < _attributes.maxEnergy)
 			{
-				_attributes.currentEnergy += deltaTime * (_attributes.energyRegenRate * 0.75f);
+				_attributes.currentEnergy += deltaTime * _attributes.movingEnergyRegenRate;
 			}
 		}
 		/* If jumping. */

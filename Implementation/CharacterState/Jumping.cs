@@ -50,7 +50,7 @@ public class Jumping : MovementState
 		context.SetMovementState(new StandingMoving());
 	}
 	
-	/* Returns the currect state. */
+	/* Returns the current state. */
 	public string State()
 	{
 		return GetType().ToString();
