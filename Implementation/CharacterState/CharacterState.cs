@@ -9,7 +9,7 @@ public class CharacterState : ICharacterState
 	MovementState _movementState;
 	
 	/* Attributes for this character. */
-	MovementAttributes _attributes;
+	MovementAttributes _movementAttributes;
 	
 	#endregion
 	
@@ -17,9 +17,9 @@ public class CharacterState : ICharacterState
 	
 	/* Constructor that takes in a parameter of type Attributes to be the 
 	 * attributes of this character. */
-	public CharacterState(MovementAttributes attributes)
+	public CharacterState(MovementAttributes movementAttributes)
 	{
-		_attributes = attributes;
+		_movementAttributes = movementAttributes;
 		_movementState = new StandingIdle();
 	}
 	
@@ -41,47 +41,47 @@ public class CharacterState : ICharacterState
 		if(movementState == "Sprinting")
 		{
 			/* If not at sprinting speed, then change current speed to be sprint speed. */
-			if(_attributes.currentSpeed != _attributes.sprintingSpeed)
+			if(_movementAttributes.currentSpeed != _movementAttributes.sprintingSpeed)
 			{
-				_attributes.currentSpeed = _attributes.sprintingSpeed;
+				_movementAttributes.currentSpeed = _movementAttributes.sprintingSpeed;
 			}
 			
 			/* Decrease energy by proper amount. */
-			_attributes.currentEnergy -= deltaTime * _attributes.sprintCost;
+			_movementAttributes.currentEnergy -= deltaTime * _movementAttributes.sprintCost;
 			
 			/* If out of energy, stop sprinting. */
-			if(_attributes.currentEnergy <= 0)
+			if(_movementAttributes.currentEnergy <= 0)
 			{
 				Stop();
-				_attributes.fatigued = true;
+				_movementAttributes.fatigued = true;
 			}
 		}
 		/* If not moving. */
 		else if((movementState == "StandingIdle") || (movementState == "CrouchingIdle"))
 		{	
 			/* If not at max energy, regenerate energy. */
-			if(_attributes.currentEnergy < _attributes.maxEnergy)
+			if(_movementAttributes.currentEnergy < _movementAttributes.maxEnergy)
 			{
-				_attributes.currentEnergy += deltaTime * _attributes.idleEnergyRegenRate;
+				_movementAttributes.currentEnergy += deltaTime * _movementAttributes.idleEnergyRegenRate;
 			}
 		}
 		/* If moving, but not sprinting. */
 		else if((movementState == "StandingMoving") || (movementState == "CrouchingMoving"))
 		{
 			/* Apply walking speed if needed. */
-			if((movementState == "StandingMoving") && (_attributes.currentSpeed != _attributes.walkingSpeed))
+			if((movementState == "StandingMoving") && (_movementAttributes.currentSpeed != _movementAttributes.walkingSpeed))
 			{
-				_attributes.currentSpeed = _attributes.walkingSpeed;
+				_movementAttributes.currentSpeed = _movementAttributes.walkingSpeed;
 			}
 			/* Apply crouching speed if needed. */
-			else if ((movementState == "CrouchingMoving") && (_attributes.currentSpeed != _attributes.crouchingSpeed))
+			else if ((movementState == "CrouchingMoving") && (_movementAttributes.currentSpeed != _movementAttributes.crouchingSpeed))
 			{
-				_attributes.currentSpeed = _attributes.crouchingSpeed;
+				_movementAttributes.currentSpeed = _movementAttributes.crouchingSpeed;
 			}
 			/* If not at max energy, regenerate 0.75 of energy regen rate because still moving. */
-			if(_attributes.currentEnergy < _attributes.maxEnergy)
+			if(_movementAttributes.currentEnergy < _movementAttributes.maxEnergy)
 			{
-				_attributes.currentEnergy += deltaTime * _attributes.movingEnergyRegenRate;
+				_movementAttributes.currentEnergy += deltaTime * _movementAttributes.movingEnergyRegenRate;
 			}
 		}
 		/* If jumping. */
@@ -91,15 +91,15 @@ public class CharacterState : ICharacterState
 		}
 		
 		/* If fatigued and now past fatigue threshold, no longer fatigued. */
-		if((_attributes.currentEnergy > _attributes.fatigueThreshold) &&(_attributes.fatigued))
+		if((_movementAttributes.currentEnergy > _movementAttributes.fatigueThreshold) &&(_movementAttributes.fatigued))
 		{
-			_attributes.fatigued = false;
+			_movementAttributes.fatigued = false;
 		}	
 		
 		/* Clamp the current energy to max energy. */
-		if(_attributes.currentEnergy > _attributes.maxEnergy)
+		if(_movementAttributes.currentEnergy > _movementAttributes.maxEnergy)
 		{
-			_attributes.currentEnergy = _attributes.maxEnergy;
+			_movementAttributes.currentEnergy = _movementAttributes.maxEnergy;
 		}
 		
 		#endregion
@@ -138,7 +138,7 @@ public class CharacterState : ICharacterState
 	public void Sprint()
 	{
 		/* If not fatigued, sprint. */
-		if(!_attributes.fatigued)
+		if(!_movementAttributes.fatigued)
 		{
 			_movementState.Sprint(this);
 		}
