@@ -5,14 +5,19 @@ public class CharacterState : ICharacterState
 	
 	#region Fields
 	
+	/* Current movement state. */
 	MovementState _movementState;
-	Attributes _attributes;
+	
+	/* Attributes for this character. */
+	MovementAttributes _attributes;
 	
 	#endregion
 	
 	#region Constructors
 	
-	public CharacterState(Attributes attributes)
+	/* Constructor that takes in a parameter of type Attributes to be the 
+	 * attributes of this character. */
+	public CharacterState(MovementAttributes attributes)
 	{
 		_attributes = attributes;
 		_movementState = new StandingIdle();
@@ -22,14 +27,18 @@ public class CharacterState : ICharacterState
 	
 	#region Update Method
 	
-	// Update is called once per frame
+	/* Update is called once per frame. Updates character's states and uses
+	  * parameter delta time, which is the amount of time in seconds from last
+	  * update call. */
 	public void Update (float deltaTime) 
 	{
+		#region Movement State Update
+		
 		/* Get current state. */
 		string movementState = _movementState.State();
 		
 		/* If Sprinting, decrease energy. */
-		if(movementState == "StandingSprinting")
+		if(movementState == "Sprinting")
 		{
 			/* If not at sprinting speed, then change current speed to be sprint speed. */
 			if(_attributes.currentSpeed != _attributes.sprintingSpeed)
@@ -93,37 +102,39 @@ public class CharacterState : ICharacterState
 			_attributes.currentEnergy = _attributes.maxEnergy;
 		}
 		
+		#endregion
+		
 	}
 	
 	#endregion
 	
 	#region Other Methods
 	
-	/* Used to send Move input to state chart. */
+	/* Used to send Move input to the movement state chart. */
 	public void Move()
 	{
 		_movementState.Move(this);
 	}
 	
-	/* Used to send Stop input to state chart. */
+	/* Used to send Stop input to the movement state chart. */
 	public void Stop()
 	{
 		_movementState.Stop(this);
 	}
 	
-	/* Used to send Crouch input to state chart. */
+	/* Used to send Crouch input to the movement state chart. */
 	public void Crouch()
 	{
 		_movementState.Crouch(this);	
 	}
 	
-	/* Used to send Jump input to state chart. */
+	/* Used to send Jump input to the movement state chart. */
 	public void Jump()
 	{
 		_movementState.Jump(this);
 	}
 	
-	/* Used to send Sprint input to state chart. */
+	/* Used to send Sprint input to the movement state chart. */
 	public void Sprint()
 	{
 		/* If not fatigued, sprint. */
@@ -137,7 +148,7 @@ public class CharacterState : ICharacterState
 	public void StopSprint()
 	{
 		/* If sprinting, then stop it. */
-		if(_movementState.State() == "StandingSprinting")
+		if(_movementState.State() == "Sprinting")
 		{
 			_movementState.Stop(this);
 		}
@@ -149,7 +160,7 @@ public class CharacterState : ICharacterState
 		/* If jumping, then complete jump. */
 		if(_movementState.State() == "Jumping")
 		{
-			_movementState.Complete(this);
+			_movementState.Stop(this);
 		}
 	}
 	

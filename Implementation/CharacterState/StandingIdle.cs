@@ -1,11 +1,11 @@
 using System;
-using UnityEngine;
 	
 public class StandingIdle : MovementState
 {
 	
 	#region Constructors
 	
+	/* Default constructor. */
 	public StandingIdle ()
 	{
 		

@@ -1,11 +1,11 @@
 using System;
-	
-public class StandingSprinting : MovementState
+
+public class Sprinting: MovementState
 {
-	
 	#region Constructors
 	
-	public StandingSprinting ()
+	/* Default constructor. */
+	public Sprinting ()
 	{
 
 	}
@@ -57,6 +57,6 @@ public class StandingSprinting : MovementState
 	}
 	
 	#endregion
-
+	
 }
 

@@ -5,6 +5,7 @@ public class Jumping : MovementState
 	
 	#region Constructors
 	
+	/* Default constructor. */
 	public Jumping ()
 	{
 		
@@ -23,7 +24,7 @@ public class Jumping : MovementState
 	/* Movement is stopped. */
 	public void Stop(CharacterState context)
 	{
-		return;
+		context.SetMovementState(new StandingMoving());
 	}
 	
 	/* A crouch is performed. */
@@ -42,12 +43,6 @@ public class Jumping : MovementState
 	public void Sprint(CharacterState context)
 	{
 		return;
-	}
-	
-	/* The current state is complete. */
-	public void Complete(CharacterState context)
-	{
-		context.SetMovementState(new StandingMoving());
 	}
 	
 	/* Returns the current state. */

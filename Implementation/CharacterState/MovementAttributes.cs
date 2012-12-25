@@ -1,6 +1,6 @@
 using System;
 
-public class Attributes
+public class MovementAttributes
 {
 	/* Max energy. */
 	public float maxEnergy;
@@ -35,11 +35,14 @@ public class Attributes
 	/* Determines if the entity is fatigued. */
 	public bool fatigued;
 	
-	public Attributes ()
+	/* Default constructor. */
+	public MovementAttributes ()
 	{
 		currentSpeed = 0;
 		currentEnergy = maxEnergy;
 		fatigued = false;
 	}
+	
+	
 }
 

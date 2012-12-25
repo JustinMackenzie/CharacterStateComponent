@@ -1,11 +1,11 @@
 using System;
-using UnityEngine;
 	
 public class StandingMoving : MovementState
 {
 	
 	#region Constructors
 	
+	/* Default constructor. */
 	public StandingMoving ()
 	{
 		
@@ -42,7 +42,7 @@ public class StandingMoving : MovementState
 	/* A sprint is performed. */
 	public void Sprint(CharacterState context)
 	{
-		context.SetMovementState(new StandingSprinting());
+		context.SetMovementState(new Sprinting());
 	}
 	
 	/* The current state is complete. */

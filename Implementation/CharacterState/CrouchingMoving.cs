@@ -5,6 +5,7 @@ public class CrouchingMoving : MovementState
 	
 	#region Constructors
 	
+	/* Default constructor. */
 	public CrouchingMoving ()
 	{
 
@@ -41,7 +42,7 @@ public class CrouchingMoving : MovementState
 	/* A sprint is performed. */
 	public void Sprint(CharacterState context)
 	{
-		context.SetMovementState(new StandingSprinting());
+		context.SetMovementState(new Sprinting());
 	}
 	
 	/* The current state is complete. */

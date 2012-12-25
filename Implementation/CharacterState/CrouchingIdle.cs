@@ -5,6 +5,7 @@ public class CrouchingIdle : MovementState
 	
 	#region Constructors
 	
+	/* Default constructor. */
 	public CrouchingIdle ()
 	{
 		
